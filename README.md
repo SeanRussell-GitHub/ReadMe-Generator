@@ -31,14 +31,12 @@
 
 ## Licenses
 
-[]
+GNU
+  
+[MIT]
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
-[Apache](https://opensource.org/licenses/Apache-2.0)
-
-[GNU](https://www.gnu.org/licenses/gpl-3.0.html)
 
     

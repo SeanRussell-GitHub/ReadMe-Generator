@@ -4,7 +4,7 @@ const fs = require('fs');
 const util = require('util');
 
 const writeFileAsync = util.promisify(fs.writeFile);
-let license = "";
+
 let lincenseLink = "";
 let badge = "";
 
@@ -85,17 +85,37 @@ const writeToFile = (answers) =>
 
 ## Licenses
 
+${answers.licenseList}
+  
 [${license}]${lincenseLink}
 
 ${badge}
 
-[MIT](https://choosealicense.com/licenses/mit/)
 
-[Apache](https://opensource.org/licenses/Apache-2.0)
-
-[GNU](https://www.gnu.org/licenses/gpl-3.0.html)
 
     `;
+// ${answers.licenseList}
+
+
+// TODO: Create a function to initialize app
+function init() {
+
+  promptUser()
+  .then((answers) => {
+    const license = answers.licenseList;
+   console.log(license);
+   renderLicenseBadge(license);
+    writeFileAsync('README.md', writeToFile(answers))
+  })
+  // .then((results) => )
+    .then(() => console.log('Successfully wrote to README.md'))
+    .catch((err) => console.error(err));
+};
+
+// Function call to initialize app
+init();
+
+
 
 
     // [GNU](https://www.gnu.org/licenses/gpl-3.0.html)
@@ -113,17 +133,20 @@ ${badge}
     // [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
+    function renderLicenseBadge() {
+      if (license = "MIT") {
+            badge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";          
+        } else {
+          if (license = "Apache") {
+            badge = "[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
+          } else {
+            if (license = "GNU") {
+              badge = "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)";
+            } else {
+              badge = "no license given, unknown";
+            }
+          }
+        }
+      }
+    
 
-
-// TODO: Create a function to initialize app
-function init() {
-  let license = '';
-  promptUser()
-  
-  .then((answers) => writeFileAsync('README.md', writeToFile(answers)))
-    .then(() => console.log('Successfully wrote to README.md'))
-    .catch((err) => console.error(err));
-};
-
-// Function call to initialize app
-init();
