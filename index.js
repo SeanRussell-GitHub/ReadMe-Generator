@@ -1,12 +1,9 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const util = require('util');
-
-const writeFileAsync = util.promisify(fs.writeFile);
-
-let lincenseLink = "";
-let badge = "";
+// const util = require('util');
+const generateMarkdown = require('./generateMarkdown');
+// const writeFileAsync = util.promisify(fs.writeFile);
 
 // TODO: Create an array of questions for user input
 const promptUser = () => {
@@ -42,111 +39,31 @@ const promptUser = () => {
         message: "Please enter any test instructions:",
     },
     {
-        type: 'rawlist',
+        type: 'list',
         name: 'licenseList',
         message: "Please select from this list of licenses:",
-        choices: ['', 'MIT','GNU','Apache']
+        choices: ['None', 'MIT','GNU','Apache']
     },
 ]);
 };
 
 // TODO: Create a function to write README file
-const writeToFile = (answers) =>
-`# ${answers.projectTitle}
-
- ## Description:
-    ${answers.description}
-
- ## Table of Contents:
-      Description
-      Installation Instructions
-      Usage Information
-      Contribution Guide
-      Test Instructions
-      Questions
-      License
-
-    
-##  Installation Instructions:
-    ${answers.installInstructions}
-    
-##  Usage Information:
-    ${answers.usageInfo}
-  
-##  Contribution Guide:
-    ${answers.contribGuide}
-    
-##  Test Instructions:
-    ${answers.testInstruct}
-
-##  Questions:
-
-
-
-## Licenses
-
-${answers.licenseList}
-  
-[${license}]${lincenseLink}
-
-${badge}
-
-
-
-    `;
+function writeToFile(fileName, data) {
+  fs.appendFile(`${fileName}.md`, data, 
+  (err) => err ? console.error(err) : console.log(` We have created ${fileName}.md successfully. `))
+}
 // ${answers.licenseList}
 
 
 // TODO: Create a function to initialize app
 function init() {
-
   promptUser()
   .then((answers) => {
-    const license = answers.licenseList;
-   console.log(license);
-   renderLicenseBadge(license);
-    writeFileAsync('README.md', writeToFile(answers))
+   writeToFile(answers.projectTitle, generateMarkdown(answers));
   })
-  // .then((results) => )
-    .then(() => console.log('Successfully wrote to README.md'))
-    .catch((err) => console.error(err));
-};
+}
 
 // Function call to initialize app
 init();
 
-
-
-
-    // [GNU](https://www.gnu.org/licenses/gpl-3.0.html)
-
-    // [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-
-
-    // [Apache](https://opensource.org/licenses/Apache-2.0)
-
-    // [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-
-
-    // [MIT](https://choosealicense.com/licenses/mit/) 
-
-    // [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-
-    function renderLicenseBadge() {
-      if (license = "MIT") {
-            badge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";          
-        } else {
-          if (license = "Apache") {
-            badge = "[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
-          } else {
-            if (license = "GNU") {
-              badge = "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)";
-            } else {
-              badge = "no license given, unknown";
-            }
-          }
-        }
-      }
-    
 
