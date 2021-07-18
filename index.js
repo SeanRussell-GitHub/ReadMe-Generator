@@ -50,7 +50,7 @@ const promptUser = () => {
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
   fs.appendFile(`${fileName}.md`, data, 
-  (err) => err ? console.error(err) : console.log(` We have created ${fileName}.md successfully. `))
+  (err) => err ? console.error(err) : console.log(`We have created ${fileName}.md successfully.`))
 }
 // ${answers.licenseList}
 
