@@ -90,7 +90,7 @@ function generateMarkdown(data) {
 * [Contribution Guide](#contribution-guide)
 * [Test Instructions](#test-instructions)
 * [Questions](#questions)
-* [Licenses](#license)
+* [License](#license)
  
      
 ##  Installation Instructions:
@@ -116,7 +116,7 @@ Please feel free to email me:
 * [${data.contactEmail}](mailto:${data.contactEmail})
 
 
-## Licenses
+## License
  
  [${data.licenseList}](${renderLicenseLink(data.licenseList)})
  ${renderLicenseSection(data.licenseList)}
