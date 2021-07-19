@@ -39,6 +39,16 @@ const promptUser = () => {
         message: "Please enter any test instructions:",
     },
     {
+        type: 'input',
+        name: 'gitHubId',
+        message: 'Please enter your GitHub ID:',
+    },
+    {
+        type: 'input',
+        name:'contactEmail',
+        message: 'Please enter your contact email:',
+    },
+    {
         type: 'list',
         name: 'licenseList',
         message: "Please select from this list of licenses:",
